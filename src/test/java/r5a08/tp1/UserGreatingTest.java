@@ -1,33 +1,39 @@
 package r5a08.tp1;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 
-import java.util.regex.Pattern;
+import org.junit.jupiter.api.Test;
+import r5a08.UserGreating;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class UserGreatingTest {
 
-    private UserGreating user;
+    @Test
+    public void testformatGreating() throws UserGreating.UserGreatingFailureException {
 
-    @BeforeAll
-    public void initialiser(){
-        user = new UserGreating();
-    }
-    public void testformatGreating(){
+        //Arrange
+        UserGreating user = new UserGreating();
 
+        //Act
+        String nom = "Romain";
 
-
-
-        assertEquals("Bonjour, Romain", this.user.formatGreating("Romain"));
-        assertThatExceptionOfType(RuntimeException.class).isThrownBy(() -> {
-            // ...
-        });
+        //Assert
+        assertEquals("Bonjour, Romain", user.formatGreating(nom));
 
     }
-    @AfterAll
-    public void nettoyer_memoire(){
-        user = null;
+
+    @Test
+    public void testformatGreatingFailureException() throws UserGreating.UserGreatingFailureException {
+
+        //Arrange
+        UserGreating user = new UserGreating();
+
+        //Act
+        String nom_incorrect = "UJFOy'_çy=hEZKHè_y";
+
+        //Assert
+        assertThatExceptionOfType(UserGreating.UserGreatingFailureException.class).isThrownBy(
+                ()->UserGreating.formatGreating(nom_incorrect)
+        );
     }
 }
