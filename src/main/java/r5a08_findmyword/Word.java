@@ -10,7 +10,7 @@ public class Word {
         this.word = motCorrect;
     }
 
-    public List<Letter> guess(String tentative) {
+    /*public List<Letter> guess(String tentative) {
         Score score = new Score(word);
         int i=0;
         List<Letter> liste = new ArrayList<>();
@@ -20,5 +20,17 @@ public class Word {
             i+=1;
         }
         return liste;
+    }*/
+//    public List<Letter> guess(String tentative){
+//        Score score = new Score(word);
+//        score.assess(tentative);
+//        return score.resultat;
+//    }
+    public Score guess(String attempt) {
+        Score score = new Score(word);
+
+        score.assess(attempt);
+
+        return score;
     }
 }
